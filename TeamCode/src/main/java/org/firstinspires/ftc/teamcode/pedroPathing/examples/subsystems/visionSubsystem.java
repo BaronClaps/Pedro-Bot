@@ -49,6 +49,12 @@ public class visionSubsystem {
         webcam1 = hardwareMap.get(WebcamName.class, "webcam1");
     }
 
+    public visionSubsystem(HardwareMap hardwareMap, Telemetry telemetry) {
+        servoSubsystem = new servoSubsystem(hardwareMap);
+        this.telemetry = telemetry;
+        webcam1 = hardwareMap.get(WebcamName.class, "webcam1");
+    }
+
     public void init() {
         initAprilTag();
         //setManualExposure(100, 1);

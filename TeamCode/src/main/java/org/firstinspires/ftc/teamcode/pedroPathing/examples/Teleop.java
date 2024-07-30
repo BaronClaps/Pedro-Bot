@@ -1,5 +1,7 @@
-package org.firstinspires.ftc.teamcode.pedroPathing.examples.subsystems;
+package org.firstinspires.ftc.teamcode.pedroPathing.examples;
 
+import org.firstinspires.ftc.teamcode.pedroPathing.examples.subsystems.servoSubsystem;
+import org.firstinspires.ftc.teamcode.pedroPathing.examples.subsystems.visionSubsystem;
 import org.firstinspires.ftc.teamcode.pedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.pedroPathing.localization.Pose;
 
@@ -9,7 +11,6 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.pedroPathing.pathGeneration.MathFunctions;
 import org.firstinspires.ftc.teamcode.pedroPathing.pathGeneration.Vector;
 
 public class Teleop {
@@ -18,8 +19,6 @@ public class Teleop {
     private visionSubsystem visionSubsystem;
 
     private Follower follower;
-    private Vector driveVector;
-    private Vector headingVector;
     private Pose startPose;
 
     private Telemetry telemetry;
@@ -88,8 +87,6 @@ public class Teleop {
 
     public void init() {
         servoSubsystem.init();
-        driveVector = new Vector();
-        headingVector = new Vector();
     }
 
     public void update() {
@@ -156,6 +153,7 @@ public class Teleop {
 
     public void start() {
         servoSubsystem.start();
+        follower.setPose(startPose);
         follower.startTeleopDrive();
     }
 

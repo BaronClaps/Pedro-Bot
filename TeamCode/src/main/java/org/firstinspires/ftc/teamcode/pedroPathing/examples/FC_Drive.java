@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.pedroPathing.examples;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.pedroPathing.examples.subsystems.Teleop;
 import org.firstinspires.ftc.teamcode.pedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.pedroPathing.localization.Pose;
 
@@ -15,7 +14,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.localization.Pose;
  */
 
 @TeleOp(name = "Example Field-Centric Teleop", group = "Examples")
-public class ExampleTeleop_FieldCentric extends OpMode {
+public class FC_Drive extends OpMode {
 
     private Teleop teleop;
 
@@ -36,10 +35,6 @@ public class ExampleTeleop_FieldCentric extends OpMode {
     @Override
     public void loop() {
         teleop.update();
-    }
-
-    @Override
-    public void stop() {
     }
 
 }
