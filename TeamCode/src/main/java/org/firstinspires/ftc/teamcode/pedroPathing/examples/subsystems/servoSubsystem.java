@@ -17,12 +17,13 @@ public class servoSubsystem {
     public void sPos(double pos) {
         s.setPosition(pos);
     }
-    public void sStart() {
-        s.setPosition(sStart);
-    }
-    public void sEnd() {
-        s.setPosition(sEnd);
+
+    public void init() {
+        s.setPosition(sInit);
     }
 
+    public void start() {
+        s.setPosition(sStart);
+    }
 
 }
