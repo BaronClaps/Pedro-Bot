@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.config.runmodes;
 
+import static org.firstinspires.ftc.teamcode.config.FieldConstants.*;
+
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -13,13 +15,9 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierL
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Path;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathBuilder;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Point;
+import org.firstinspires.ftc.teamcode.config.vision.Navigation;
 
 public class Auto {
-    enum Navigation {
-        LEFT,
-        RIGHT,
-        CENTER
-    }
 
     enum RobotStart {
         BLUE_CLOSE,
@@ -54,21 +52,6 @@ public class Auto {
 
             startLocation = isBlue ? (isClose ? RobotStart.BLUE_CLOSE : RobotStart.BLUE_FAR) : (isClose ? RobotStart.RED_CLOSE : RobotStart.RED_FAR);
 
-            switch (startLocation) {
-                case BLUE_CLOSE:
-                    startPose = new Pose(8.5, 84, 0);
-                    break;
-                case BLUE_FAR:
-                    startPose = new Pose(8.5, 36, 0);
-                    break;
-                case RED_CLOSE:
-                    startPose = new Pose(144-8.5, 84, 0);
-                    break;
-                case RED_FAR:
-                    startPose = new Pose(144-8.5, 36, 0);
-                    break;
-            }
-
     }
 
     public void init() {
@@ -76,10 +59,11 @@ public class Auto {
     }
 
     public void init_loop() {
-
+        vision.navUpdate(nav);
     }
 
     public void start() {
+        vision.navUpdate(nav);
         createPoses();
         buildPaths();
 
@@ -90,6 +74,75 @@ public class Auto {
     }
 
     public void createPoses() {
+        switch (startLocation) {
+            case BLUE_CLOSE:
+                startPose = blueCloseStart;
+                parkPose = blueClosePark;
+
+                switch(nav) {
+                    case LEFT:
+                        purplePose = blueCloseLeftPurple;
+                        yellowPose = blueLeftYellow;
+                    case CENTER:
+                        purplePose = blueCloseCenterPurple;
+                        yellowPose = blueCenterYellow;
+                    case RIGHT:
+                        purplePose = blueCloseRightPurple;
+                        yellowPose = blueRightYellow;
+                }
+                break;
+
+            case BLUE_FAR:
+                startPose = blueFarStart;
+                parkPose = blueFarPark;
+
+                switch(nav) {
+                    case LEFT:
+                        purplePose = blueFarLeftPurple;
+                        yellowPose = blueLeftYellow;
+                    case CENTER:
+                        purplePose = blueFarCenterPurple;
+                        yellowPose = blueCenterYellow;
+                    case RIGHT:
+                        purplePose = blueFarRightPurple;
+                        yellowPose = blueRightYellow;
+                }
+                break;
+
+            case RED_CLOSE:
+                startPose = redCloseStart;
+                parkPose = redClosePark;
+
+                switch(nav) {
+                    case LEFT:
+                        purplePose = redCloseLeftPurple;
+                        yellowPose = redLeftYellow;
+                    case CENTER:
+                        purplePose = redCloseCenterPurple;
+                        yellowPose = redCenterYellow;
+                    case RIGHT:
+                        purplePose = redCloseRightPurple;
+                        yellowPose = redRightYellow;
+                }
+                break;
+
+            case RED_FAR:
+                startPose = redFarStart;
+                parkPose = redFarPark;
+
+                switch(nav) {
+                    case LEFT:
+                        purplePose = redFarLeftPurple;
+                        yellowPose = redLeftYellow;
+                    case CENTER:
+                        purplePose = redFarCenterPurple;
+                        yellowPose = redCenterYellow;
+                    case RIGHT:
+                        purplePose = redFarRightPurple;
+                        yellowPose = redRightYellow;
+                }
+                break;
+        }
 
     }
 
@@ -102,14 +155,16 @@ public class Auto {
             .setLinearHeadingInterpolation(yellowPose.getHeading(), parkPose.getHeading())
             .build();
 
-        if (isClose) {
+        if (!isClose) {
             yellow = new PathBuilder()
-                .addPath(new Path(new BezierLine(new Point(purplePose), new Point(yellowPose))))
-                .setConstantHeadingInterpolation(yellowPose.getHeading())
-                .build();
-
+                    .addPath(new Path(new BezierLine(new Point(purplePose), new Point(yellowPose))))
+                    .setConstantHeadingInterpolation(yellowPose.getHeading())
+                    .build();
         } else {
-
+            yellow = new PathBuilder()
+                    .addPath(new Path(new BezierLine(new Point(purplePose), new Point(yellowPose))))
+                    .setConstantHeadingInterpolation(yellowPose.getHeading())
+                    .build();
         }
     }
 
