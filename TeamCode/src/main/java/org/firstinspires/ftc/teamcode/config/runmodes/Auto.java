@@ -29,9 +29,9 @@ public class Auto {
     private Navigation nav;
     private RobotStart startLocation;
 
-    private visionSubsystem vision;
-    private servoSubsystem servo;
-    private Follower follower;
+    public visionSubsystem vision;
+    public servoSubsystem servo;
+    public Follower follower;
 
 
     private boolean isBlue;
@@ -150,11 +150,6 @@ public class Auto {
         purple = new Path(new BezierLine(new Point(startPose), new Point(purplePose)));
         purple.setLinearHeadingInterpolation(startPose.getHeading(), purplePose.getHeading());
 
-        park = new PathBuilder()
-            .addPath(new Path(new BezierCurve(new Point(yellowPose), new Point(yellowPose.getX(), 108, Point.CARTESIAN), new Point(parkPose.getX(), 108, Point.CARTESIAN))))
-            .setLinearHeadingInterpolation(yellowPose.getHeading(), parkPose.getHeading())
-            .build();
-
         if (!isClose) {
             yellow = new PathBuilder()
                     .addPath(new Path(new BezierLine(new Point(purplePose), new Point(yellowPose))))
@@ -166,6 +161,11 @@ public class Auto {
                     .setConstantHeadingInterpolation(yellowPose.getHeading())
                     .build();
         }
+
+        park = new PathBuilder()
+            .addPath(new Path(new BezierCurve(new Point(yellowPose), new Point(yellowPose.getX(), 108, Point.CARTESIAN), new Point(parkPose.getX(), 108, Point.CARTESIAN))))
+            .setLinearHeadingInterpolation(yellowPose.getHeading(), parkPose.getHeading())
+            .build();
     }
 
 
@@ -173,6 +173,19 @@ public class Auto {
     public void followPath(Path path) {
         follower.followPath(path);
     }
+
+    public void followPath(Path path, boolean holdEnd) {
+        follower.followPath(path, holdEnd);
+    }
+
+    public void followPath(PathChain pathChain) {
+        follower.followPath(pathChain);
+    }
+
+    public void followPath(PathChain pathChain, boolean holdEnd) {
+        follower.followPath(pathChain, holdEnd);
+    }
+
 
     public void runAction(Runnable runnable) {
         runnable.run();
