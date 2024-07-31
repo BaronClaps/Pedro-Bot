@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierCurve;
+import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierPoint;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathChain;
 import org.firstinspires.ftc.teamcode.config.subsystem.servoSubsystem;
 import org.firstinspires.ftc.teamcode.config.subsystem.visionSubsystem;
@@ -186,8 +187,23 @@ public class Auto {
         follower.followPath(pathChain, holdEnd);
     }
 
+    public void holdPoint(BezierPoint point, double heading) {
+        follower.holdPoint(point, heading);
+    }
 
-    public void runAction(Runnable runnable) {
-        runnable.run();
+    public boolean isBusy() {
+        return follower.isBusy();
+    }
+
+    public double getX() {
+        return follower.getPose().getX();
+    }
+
+    public double getY() {
+        return follower.getPose().getY();
+    }
+
+    public double getHeading() {
+        return follower.getPose().getHeading();
     }
 }

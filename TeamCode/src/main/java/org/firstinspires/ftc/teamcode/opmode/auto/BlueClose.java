@@ -34,14 +34,6 @@ public class BlueClose extends OpMode {
 
         auto.followPath(auto.purple);
         auto.followPath(auto.yellow, true);
-        auto.follower.followPath(auto.purple);
-
-        auto.runAction(new Runnable() {
-            @Override
-            public void run() {
-                auto.servo.sPos(1);
-            }
-        });
 
         auto.servo.sPos(1);
     }
