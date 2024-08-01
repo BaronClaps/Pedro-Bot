@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.config.runmodes;
 
-import org.firstinspires.ftc.teamcode.config.subsystem.servoSubsystem;
-import org.firstinspires.ftc.teamcode.config.subsystem.visionSubsystem;
+import org.firstinspires.ftc.teamcode.config.subsystem.ServoSubsystem;
+import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 
@@ -14,8 +14,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Teleop {
 
-    private org.firstinspires.ftc.teamcode.config.subsystem.servoSubsystem servoSubsystem;
-    private org.firstinspires.ftc.teamcode.config.subsystem.visionSubsystem visionSubsystem;
+    private ServoSubsystem servoSubsystem;
+    private VisionSubsystem visionSubsystem;
 
     private Follower follower;
     private Pose startPose;
@@ -62,8 +62,8 @@ public class Teleop {
 
 
     public Teleop(HardwareMap hardwareMap, Telemetry telemetry, Follower follower, Pose startPose,  boolean fieldCentric, Gamepad gamepad1, Gamepad gamepad2) {
-        servoSubsystem = new servoSubsystem(hardwareMap);
-        visionSubsystem = new visionSubsystem(hardwareMap, leftFront, rightFront, leftRear, rightRear, telemetry);
+        servoSubsystem = new ServoSubsystem(hardwareMap);
+        visionSubsystem = new VisionSubsystem(hardwareMap, leftFront, rightFront, leftRear, rightRear, telemetry);
 
         this.follower = follower;
         this.startPose = startPose;

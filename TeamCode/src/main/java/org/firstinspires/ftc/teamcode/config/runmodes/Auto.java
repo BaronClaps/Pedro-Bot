@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.config.runmodes;
 
-import static org.firstinspires.ftc.teamcode.config.FieldConstants.*;
+import static org.firstinspires.ftc.teamcode.config.util.FieldConstants.*;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -8,32 +8,29 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierCurve;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierPoint;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathChain;
-import org.firstinspires.ftc.teamcode.config.subsystem.servoSubsystem;
-import org.firstinspires.ftc.teamcode.config.subsystem.visionSubsystem;
+import org.firstinspires.ftc.teamcode.config.subsystem.ServoSubsystem;
+import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierLine;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Path;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathBuilder;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Point;
+import org.firstinspires.ftc.teamcode.config.util.Action;
+import org.firstinspires.ftc.teamcode.config.util.ActionState;
+import org.firstinspires.ftc.teamcode.config.util.ActionStorage;
 import org.firstinspires.ftc.teamcode.config.vision.Navigation;
 
 public class Auto {
 
-    enum RobotStart {
-        BLUE_CLOSE,
-        BLUE_FAR,
-        RED_CLOSE,
-        RED_FAR
-    }
-
     private Navigation nav;
     private RobotStart startLocation;
 
-    public visionSubsystem vision;
-    public servoSubsystem servo;
+    public VisionSubsystem vision;
+    public ServoSubsystem servo;
     public Follower follower;
 
+    public ActionStorage actionStorage;
 
     private boolean isBlue;
     private boolean isClose;
@@ -43,8 +40,8 @@ public class Auto {
     private Pose startPose, purplePose, yellowPose, parkPose;
 
     public Auto(HardwareMap hardwareMap, Telemetry telemetry, Follower follower, boolean isBlue, boolean isClose) {
-            servo = new servoSubsystem(hardwareMap);
-            vision = new visionSubsystem(hardwareMap, telemetry);
+            servo = new ServoSubsystem(hardwareMap);
+            vision = new VisionSubsystem(hardwareMap, telemetry);
 
             this.follower = follower;
 

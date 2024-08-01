@@ -17,11 +17,11 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.GainCon
 import java.util.concurrent.TimeUnit;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class visionSubsystem {
+public class VisionSubsystem {
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
     private AprilTagProcessor aprilTag;
     private VisionPortal visionPortal;
-    private servoSubsystem servoSubsystem;
+    private ServoSubsystem servoSubsystem;
     private boolean targetFound = false;
     private AprilTagDetection desiredTag = null;
     private AprilTagPoseFtc tagPose;
@@ -37,8 +37,8 @@ public class visionSubsystem {
     private double x;
 
 
-    public visionSubsystem(HardwareMap hardwareMap, DcMotor leftFrontDrive, DcMotor rightFrontDrive, DcMotor leftBackDrive, DcMotor rightBackDrive, Telemetry telemetry) {
-        servoSubsystem = new servoSubsystem(hardwareMap);
+    public VisionSubsystem(HardwareMap hardwareMap, DcMotor leftFrontDrive, DcMotor rightFrontDrive, DcMotor leftBackDrive, DcMotor rightBackDrive, Telemetry telemetry) {
+        servoSubsystem = new ServoSubsystem(hardwareMap);
         this.leftFrontDrive = leftFrontDrive;
         this.rightFrontDrive = rightFrontDrive;
         this.leftBackDrive = leftBackDrive;
@@ -47,8 +47,8 @@ public class visionSubsystem {
         webcam1 = hardwareMap.get(WebcamName.class, "webcam1");
     }
 
-    public visionSubsystem(HardwareMap hardwareMap, Telemetry telemetry) {
-        servoSubsystem = new servoSubsystem(hardwareMap);
+    public VisionSubsystem(HardwareMap hardwareMap, Telemetry telemetry) {
+        servoSubsystem = new ServoSubsystem(hardwareMap);
         this.telemetry = telemetry;
         webcam1 = hardwareMap.get(WebcamName.class, "webcam1");
     }

@@ -1,17 +1,16 @@
 package org.firstinspires.ftc.teamcode.config.subsystem;
-import static org.firstinspires.ftc.teamcode.config.RobotConstants.*;
+import static org.firstinspires.ftc.teamcode.config.util.RobotConstants.*;
 
-import com.kuriosityrobotics.shuttle.hardware.ServoControl;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
 
-public class servoSubsystem {
+public class ServoSubsystem {
 
     private Servo s;
 
-    public servoSubsystem(HardwareMap hardwareMap) {
+    public ServoSubsystem(HardwareMap hardwareMap) {
         s = hardwareMap.get(Servo.class, "s");
     }
 

@@ -1,8 +1,15 @@
-package org.firstinspires.ftc.teamcode.config;
+package org.firstinspires.ftc.teamcode.config.util;
 
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 
 public class FieldConstants {
+
+    public enum RobotStart {
+        BLUE_CLOSE,
+        BLUE_FAR,
+        RED_CLOSE,
+        RED_FAR
+    }
 
     public static final Pose blueCloseStart = new Pose(8.5, 84, 0);
     public static final Pose blueFarStart= new Pose(8.5, 36, 0);
