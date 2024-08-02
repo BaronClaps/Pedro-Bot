@@ -25,10 +25,6 @@ public class FC_Drive extends OpMode {
     }
 
     @Override
-    public void init_loop() {
-    }
-
-    @Override
     public void start() {
         teleop.start();
     }

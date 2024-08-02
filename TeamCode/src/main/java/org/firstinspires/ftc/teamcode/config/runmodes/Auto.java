@@ -16,9 +16,7 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierL
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Path;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathBuilder;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Point;
-import org.firstinspires.ftc.teamcode.config.util.Action;
-import org.firstinspires.ftc.teamcode.config.util.ActionState;
-import org.firstinspires.ftc.teamcode.config.util.ActionStorage;
+import org.firstinspires.ftc.teamcode.config.util.action.ActionStorage;
 import org.firstinspires.ftc.teamcode.config.vision.Navigation;
 
 public class Auto {
@@ -145,6 +143,8 @@ public class Auto {
     }
 
     public void buildPaths() {
+        follower.setStartingPose(startPose);
+
         purple = new Path(new BezierLine(new Point(startPose), new Point(purplePose)));
         purple.setLinearHeadingInterpolation(startPose.getHeading(), purplePose.getHeading());
 
@@ -188,8 +188,8 @@ public class Auto {
         follower.holdPoint(point, heading);
     }
 
-    public boolean isBusy() {
-        return follower.isBusy();
+    public boolean pathNotBusy() {
+        return !follower.isBusy();
     }
 
     public double getX() {
