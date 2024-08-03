@@ -8,8 +8,6 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 
 /**
- * This is an example teleop that showcases movement and control of three servos and robot-centric driving.
- *
  * @author Baron Henderson - 24122 Tomorrow Team
  * @version 1.1, 7/23/2024
  */
