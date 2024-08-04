@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.config.vision.eocvsim;
 
+import android.graphics.Color;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
@@ -36,6 +38,7 @@ Detector extends OpenCvPipeline {
     // New Mat for HSV conversion
     private Mat binaryMat = new Mat();
     private Mat maskedInputMat = new Mat();
+    private Mat colorMat = new Mat();
     private Mat edges = new Mat(); // New Mat for storing edges
 
     private Telemetry telemetry = null;
@@ -84,22 +87,21 @@ Detector extends OpenCvPipeline {
          */
         Imgproc.cvtColor(input, hsvMat, colorSpace.cvtCode);
 
-        // Use HSV color space for better orange detection
-        Mat colorMat = hsvMat;
+        Imgproc.stackBlur(hsvMat, binaryMat, new Size(5, 5));
 
         /*
          * Create a mask for orange using the defined HSV range
          */
-        Core.inRange(colorMat, lowerOrange, upperOrange, binaryMat);
+        //Core.inRange(colorMat, lowerOrange, upperOrange, binaryMat);
 
         /*
          * Apply the mask to the original image
          */
-        maskedInputMat.release();
-        Core.bitwise_and(input, input, maskedInputMat, binaryMat);
+        //maskedInputMat.release();
+        //Core.bitwise_and(input, input, maskedInputMat, binaryMat);
 
         // Edge detection
-        Imgproc.Canny(maskedInputMat, edges, 100, 200); // Adjust threshold values as needed
+        Imgproc.Canny(binaryMat, edges, 500, 500); // Adjust threshold values as needed
 
         // Contour detection
         List<MatOfPoint> contours = new ArrayList<>();
@@ -109,8 +111,11 @@ Detector extends OpenCvPipeline {
                 List<MatOfPoint> filteredContours = new ArrayList<>();
         for (MatOfPoint contour : contours) {
             double area = Imgproc.contourArea(contour);
+            Scalar scalar = new Scalar(0.5,0.1,0.25);
+            Imgproc.drawContours(input, (List<MatOfPoint>) contour, 10, new Scalar(1,1,1));
             if (area > 50) {
                 filteredContours.add(contour);
+
             }
         }
 
@@ -119,7 +124,7 @@ Detector extends OpenCvPipeline {
         for (MatOfPoint contour : filteredContours) {
             Rect rect = Imgproc.boundingRect(contour);
             allBoundingBoxes.add(rect);
-            Imgproc.rectangle(maskedInputMat, rect.tl(), rect.br(), new Scalar(0, 0, 255), 2);
+            Imgproc.rectangle(binaryMat, rect.tl(), rect.br(), new Scalar(0, 0, 255), 2);
 
             // Calculate center point of the rectangle
             int xPos = rect.x + rect.width / 2;
@@ -162,8 +167,7 @@ Detector extends OpenCvPipeline {
          * pixel from the input Mat that were inside
          * the threshold range.
          */
-        return maskedInputMat;
-
+        return binaryMat;
     }
 
     // Function to merge overlapping bounding boxes (optional)
