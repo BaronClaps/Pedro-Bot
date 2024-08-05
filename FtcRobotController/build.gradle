@@ -13,14 +13,15 @@ android {
         targetSdkVersion 28
         buildConfigField "String", "APP_BUILD_TIME", '"' + (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ROOT).format(new Date())) + '"'
     }
+    compileSdk 35
 
-    compileSdkVersion 29
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     namespace = 'com.qualcomm.ftcrobotcontroller'
+    buildToolsVersion '35.0.0'
 }
 
 apply from: '../build.dependencies.gradle'
