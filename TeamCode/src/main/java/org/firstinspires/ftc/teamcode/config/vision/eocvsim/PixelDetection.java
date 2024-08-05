@@ -8,14 +8,14 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RubberDuck extends OpenCvPipeline {
+public class PixelDetection extends OpenCvPipeline {
 
     /*
      * These are our variables that will be
      * modifiable from the variable tuner.
      */
-    public Scalar lower_yellow = new Scalar(14, 50, 50); // Adjusted lower bound (potentially include more yellow shades)
-    public Scalar upper_yellow = new Scalar(40, 255, 255);
+    public Scalar lower_purple = new Scalar(120, 100, 100); // Adjust based on your purple color
+    public Scalar upper_purple = new Scalar(160, 255, 255); // Adjust based on your purple color
 
     public Scalar lower_gray = new Scalar(0, 0, 50); // Adjust based on your gray floor color
     public Scalar upper_gray = new Scalar(180, 255, 200); // Adjust based on your gray floor color
@@ -35,7 +35,7 @@ public class RubberDuck extends OpenCvPipeline {
 
     private Telemetry telemetry = null;
 
-    public RubberDuck(Telemetry telemetry) {
+    public PixelDetection(Telemetry telemetry) {
         this.telemetry = telemetry;
     }
 
@@ -52,7 +52,7 @@ public class RubberDuck extends OpenCvPipeline {
         Imgproc.GaussianBlur(hsvMat, hsvMat, new Size(3, 3), 0);
 
         // Create yellow mask
-        Core.inRange(hsvMat, lower_yellow, upper_yellow, binaryMat);
+        Core.inRange(hsvMat, lower_purple, upper_purple, binaryMat);
 
         // Create gray mask
         Core.inRange(hsvMat, lower_gray, upper_gray, grayMask);
