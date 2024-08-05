@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.config.subsystem;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.config.runmodes.Auto;
 import org.firstinspires.ftc.teamcode.config.vision.Navigation;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;

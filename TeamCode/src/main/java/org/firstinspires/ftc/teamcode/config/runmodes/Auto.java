@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.config.vision.Navigation;
 
 public class Auto {
 
-    private Navigation nav;
+    public Navigation nav;
     private RobotStart startLocation;
 
     public VisionSubsystem vision;
@@ -38,10 +38,12 @@ public class Auto {
     private Pose startPose, purplePose, yellowPose, parkPose;
 
     public Auto(HardwareMap hardwareMap, Telemetry telemetry, Follower follower, boolean isBlue, boolean isClose) {
-            servo = new ServoSubsystem(hardwareMap);
+
+        servo = new ServoSubsystem(hardwareMap);
             vision = new VisionSubsystem(hardwareMap, telemetry);
 
             this.follower = follower;
+
 
             this.isBlue = isBlue;
             this.isClose = isClose;
@@ -51,7 +53,7 @@ public class Auto {
     }
 
     public void init() {
-
+        nav = Navigation.LEFT;
     }
 
     public void init_loop() {
